@@ -61,7 +61,7 @@ class CatalogueTests(unittest.TestCase):
     def test_promotion_requires_exact_tuple_and_hashed_independent_evidence(self):
         evidence=self.directory/'trace.json';evidence.write_text('{"actualEffect":"none"}')
         identity=dict(packageSha256='package',executableSha256='executable',adapter='adapter',helperSha256='helper',architecture='arm64',macOS='27')
-        packages=[dict(sha256='package',adapter='adapter',entrypoint=dict(sha256='executable'))]
+        packages=[dict(sha256='package',adapter='adapter',entrypoint='bin/tool',inventory={'bin/tool':'executable'})]
         families=[dict(id='CASE',mandatory=True,evidenceClasses=['L'])]
         report=dict(status='passed',identity=identity,cases=[dict(id='CASE',status='passed',identity=identity,evidenceClasses=['L'],evidence=[dict(path='trace.json',sha256=catalogue.digest(evidence))])])
         catalogue.verify_evidence(report,self.directory,families,packages)

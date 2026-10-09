@@ -114,7 +114,7 @@ def verify_evidence(report,evidence_root,families,packages):
     expected=report.get('identity',{})
     fields=('packageSha256','executableSha256','adapter','helperSha256','architecture','macOS')
     if any(not isinstance(expected.get(field),str) or not expected[field] for field in fields):raise ValueError('Acceptance identity is incomplete')
-    if not any(p.get('sha256')==expected['packageSha256'] and p.get('adapter')==expected['adapter'] and p.get('entrypoint',{}).get('sha256')==expected['executableSha256'] for p in packages):raise ValueError('Acceptance tuple is absent from promoted catalogue')
+    if not any(p.get('sha256')==expected['packageSha256'] and p.get('adapter')==expected['adapter'] and p.get('inventory',{}).get(p.get('entrypoint'))==expected['executableSha256'] for p in packages):raise ValueError('Acceptance tuple is absent from promoted catalogue')
     for family in families:
         if not family['mandatory']:continue
         rows=[r for r in cases if r.get('id')==family['id']]
