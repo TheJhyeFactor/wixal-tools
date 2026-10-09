@@ -17,10 +17,12 @@ jobs:
       - run: python scripts/validate.py
       - name: Build pinned source, retain vendored source and run real listener check
         run: python scripts/build-rustscan.py
+      - name: Archive the candidate with executable permissions
+        run: tar -czf artifacts/rustscan-darwin-arm64-candidate.tar.gz -C artifacts/rustscan-darwin-arm64 .
       - name: Retain unsigned candidate and provenance
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: rustscan-darwin-arm64-candidate-${{ github.sha }}
-          path: artifacts/rustscan-darwin-arm64/
+          path: artifacts/rustscan-darwin-arm64-candidate.tar.gz
           if-no-files-found: error
           retention-days: 14

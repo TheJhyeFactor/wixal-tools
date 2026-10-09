@@ -33,7 +33,7 @@ python3 scripts/validate.py --live
 
 The Source contracts workflow runs the local checks for pushes and pull requests. It rejects floating source references, recipe/source mismatches and attempts to treat forks as release qualification.
 
-The manually dispatched **RustScan arm64 build candidate** workflow builds the pinned source with Rust 1.90.0 and a hash-pinned Cargo.lock on arm64 macOS. Dependencies are vendored before an offline locked build. The output retains the upstream and vendored source, licenses, executable digest, recipe/compiler/platform identity, system-library inspection, inventory and a real loopback listener smoke check. The artifact is unsigned and retained for 14 days. One build is not proof of reproducibility or complete compatibility. No workflow holds production signing keys or publishes a release.
+The manually dispatched **RustScan arm64 build candidate** workflow builds the pinned source with Rust 1.90.0 and a hash-pinned Cargo.lock on arm64 macOS. Dependencies are vendored before an offline locked build. The output retains the upstream and vendored source, licenses, executable digest, recipe/compiler/platform identity, system-library inspection, inventory and a real loopback listener smoke check. A tar archive preserves executable permissions through GitHub's artifact ZIP transport. The artifact is unsigned and retained for 14 days. One build is not proof of reproducibility or complete compatibility. No workflow holds production signing keys or publishes a release.
 
 To run it from the CLI:
 
