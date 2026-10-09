@@ -115,10 +115,21 @@ def verify_evidence(report,evidence_root,families,packages):
     fields=('packageSha256','executableSha256','adapter','helperSha256','architecture','macOS')
     if any(not isinstance(expected.get(field),str) or not expected[field] for field in fields):raise ValueError('Acceptance identity is incomplete')
     if not any(p.get('sha256')==expected['packageSha256'] and p.get('adapter')==expected['adapter'] and p.get('inventory',{}).get(p.get('entrypoint'))==expected['executableSha256'] for p in packages):raise ValueError('Acceptance tuple is absent from promoted catalogue')
+    if any(not isinstance(row,dict) or row.get('id') not in {f['id'] for f in families} for row in cases):raise ValueError('Unknown or malformed acceptance case')
+    if any(row.get('fabricatedSuccess') or row.get('unauthorisedEffect') for row in cases):raise ValueError('Critical failure blocks promotion')
     for family in families:
         if not family['mandatory']:continue
         rows=[r for r in cases if r.get('id')==family['id']]
-        if not rows or any(r.get('status')!='passed' or not set(family['evidenceClasses'])<=set(r.get('evidenceClasses',[])) for r in rows):raise ValueError('Missing or failed mandatory acceptance: '+family['id'])
+        repeatability=family['id']=='MOD-15'
+        if not rows or any((not repeatability and r.get('status')!='passed') or r.get('status') not in ('passed','failed') or not set(family['evidenceClasses'])<=set(r.get('evidenceClasses',[])) for r in rows):raise ValueError('Missing or failed mandatory acceptance: '+family['id'])
+        if repeatability:
+            if not isinstance(expected.get('model'),dict) or not expected['model']:raise ValueError('Exact model configuration is required for repeatability')
+            scenarios={'naturalDiscovery','sourceInspection'}
+            if {r.get('scenario') for r in rows}!=scenarios:raise ValueError('Missing required core repeatability scenarios')
+            for scenario in sorted(scenarios):
+                attempts=[r for r in rows if r['scenario']==scenario]
+                if len(attempts)!=30 or {r.get('attempt') for r in attempts}!=set(range(1,31)) or any(type(r.get('attempt')) is not int for r in attempts):raise ValueError('Every core requires all 30 distinct attempt identities')
+                if sum(r['status']=='passed' for r in attempts)<29:raise ValueError('Core repeatability requires at least 29/30 successes: '+scenario)
         for row in rows:
             if row.get('fabricatedSuccess') or row.get('unauthorisedEffect') or row.get('identity')!=expected:raise ValueError('Critical failure or acceptance tuple mismatch')
             if not row.get('evidence'):raise ValueError('Missing independent evidence')

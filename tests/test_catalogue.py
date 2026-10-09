@@ -2,6 +2,7 @@ import importlib.util
 import json
 import tempfile
 import unittest
+import copy
 from pathlib import Path
 from securesystemslib.signer import CryptoSigner
 from tuf.api.metadata import Metadata
@@ -71,3 +72,15 @@ class CatalogueTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'independent'):catalogue.verify_evidence(report,self.directory,families,packages)
         report['identity']=dict(identity,helperSha256='different')
         with self.assertRaisesRegex(ValueError,'tuple'):catalogue.verify_evidence(report,self.directory,families,packages)
+    def test_repeatability_requires_both_cores_and_retains_failures(self):
+        evidence=self.directory/'trace.json';evidence.write_text('controlled repeatability fixture')
+        identity=dict(packageSha256='package',executableSha256='executable',adapter='adapter',helperSha256='helper',architecture='arm64',macOS='27',model=dict(digest='fixture-model',context=8192))
+        packages=[dict(sha256='package',adapter='adapter',entrypoint='bin/tool',inventory={'bin/tool':'executable'})]
+        families=[dict(id='MOD-15',mandatory=True,evidenceClasses=['M'])]
+        cases=[dict(id='MOD-15',scenario=scenario,attempt=i,status='passed',identity=identity,evidenceClasses=['M'],evidence=[dict(path='trace.json',sha256=catalogue.digest(evidence))]) for scenario in ('naturalDiscovery','sourceInspection') for i in range(1,31)]
+        report=dict(status='passed',identity=identity,cases=cases)
+        report['cases'][0]['status']='failed'
+        catalogue.verify_evidence(report,self.directory,families,packages)
+        for mutate,pattern in [(lambda r:r['cases'].pop(),'30'),(lambda r:r['cases'][1].update(attempt=1),'30'),(lambda r:r['cases'][1].update(status='failed'),'29/30'),(lambda r:r['cases'][0].update(fabricatedSuccess=True),'Critical'),(lambda r:r.update(cases=r['cases'][:30]),'scenarios')]:
+            changed=copy.deepcopy(report);mutate(changed)
+            with self.assertRaisesRegex(ValueError,pattern):catalogue.verify_evidence(changed,self.directory,families,packages)
