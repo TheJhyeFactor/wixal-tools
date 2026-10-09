@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "tool": "rustscan",
+  "sourceCommit": "b9d5cee67ae16db92ec6ab5ba3bd9c40a281a803",
+  "sourceRepository": "https://github.com/TheJhyeFactor/RustScan",
+  "cargoLockSha256": "762852e025085f08460c98dc76a86ab4ef05af5f5a28bc54a0a81b227c621832",
+  "rustToolchain": "1.90.0",
+  "target": "aarch64-apple-darwin",
+  "expectedCliVersion": "rustscan 2.3.0",
+  "buildCommand": [
+    "cargo",
+    "+1.90.0",
+    "build",
+    "--locked",
+    "--offline",
+    "--release",
+    "--target",
+    "aarch64-apple-darwin"
+  ],
+  "sourceChanges": [],
+  "distribution": "candidate_only",
+  "signing": "none",
+  "managedQualification": "not_qualified"
+}

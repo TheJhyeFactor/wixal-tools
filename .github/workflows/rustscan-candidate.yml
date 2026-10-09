@@ -1,0 +1,26 @@
+name: RustScan arm64 build candidate
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.14'
+      - run: python scripts/validate.py
+      - name: Build pinned source, retain vendored source and run real listener check
+        run: python scripts/build-rustscan.py
+      - name: Retain unsigned candidate and provenance
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: rustscan-darwin-arm64-candidate-${{ github.sha }}
+          path: artifacts/rustscan-darwin-arm64/
+          if-no-files-found: error
+          retention-days: 14

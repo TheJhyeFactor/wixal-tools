@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "channel": "source_and_build_candidates",
+  "releaseStatus": "not_qualified",
+  "publicTufCatalogue": null,
+  "productionTrustedRoot": null,
+  "productionSigningKeys": "not_configured",
+  "sourceChanges": "none_in_initial_rustscan_recipe",
+  "requiredGates": [
+    "review_tool_and_dependency_redistribution_terms",
+    "retain_corresponding_source_and_notices",
+    "independent_trust_custody_and_root_quorum",
+    "root_rotation_revocation_and_recovery_evidence",
+    "controlled_metadata_and_payload_hosting_with_verified_fetch_policy",
+    "developer_id_notarization_and_installed_gatekeeper_acceptance",
+    "all_104_mandatory_application_acceptance_families",
+    "exact_package_adapter_app_os_hardware_identity",
+    "model_held_out_repeated_scope_and_injection_evaluation",
+    "installed_tools_library_and_recon_gui_acceptance"
+  ],
+  "automaticPromotion": false
+}

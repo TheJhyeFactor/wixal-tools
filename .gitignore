@@ -1,0 +1,8 @@
+artifacts/
+build/
+.venv/
+__pycache__/
+*.pyc
+*.pem
+*.key
+.DS_Store

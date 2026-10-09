@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-09T01:20:22.176974+00:00",
+  "owner": "TheJhyeFactor",
+  "application": "https://github.com/TheJhyeFactor/Wixal",
+  "channel": "source_and_build_candidates",
+  "productionCatalogue": null,
+  "tools": [
+    {
+      "id": "rustscan",
+      "name": "RustScan",
+      "upstream": "https://github.com/bee-san/RustScan",
+      "fork": "https://github.com/TheJhyeFactor/RustScan",
+      "sourceCommit": "b9d5cee67ae16db92ec6ab5ba3bd9c40a281a803",
+      "sourceRef": "b9d5cee67ae16db92ec6ab5ba3bd9c40a281a803",
+      "pinKind": "existing_pilot_source",
+      "defaultBranch": "master",
+      "licenseId": "GPL-3.0",
+      "licenseFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+          "url": "https://github.com/bee-san/RustScan/blob/b9d5cee67ae16db92ec6ab5ba3bd9c40a281a803/LICENSE"
+        }
+      ],
+      "adapter": "network_discover",
+      "status": "pilot_candidate",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false,
+      "version": "2.3.0",
+      "recipe": "recipes/rustscan-darwin-arm64.json",
+      "note": "Pilot source commit underlying Homebrew 2.4.1; Cargo and executable report 2.3.0."
+    },
+    {
+      "id": "nmap",
+      "name": "nmap",
+      "upstream": "https://github.com/nmap/nmap",
+      "fork": "https://github.com/TheJhyeFactor/nmap",
+      "sourceCommit": "6b9d95c5f12efd9d53491b82a27423e0899b212b",
+      "sourceRef": "master",
+      "pinKind": "source_snapshot",
+      "defaultBranch": "master",
+      "licenseId": "NOASSERTION",
+      "licenseFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "9d9a9a763c0e6145172cfe7d8483e23b38ce60b6c79a82e4894242917bdae6d3",
+          "url": "https://github.com/nmap/nmap/blob/6b9d95c5f12efd9d53491b82a27423e0899b212b/LICENSE"
+        }
+      ],
+      "adapter": "network_scan",
+      "status": "external_provider",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false,
+      "canonicalSource": "https://svn.nmap.org/nmap/",
+      "note": "Official GitHub mirror. NPSL redistribution and embedded-product terms need a separate review before managed packaging.",
+      "distributionGate": "license_review_required"
+    },
+    {
+      "id": "ffuf",
+      "name": "ffuf",
+      "upstream": "https://github.com/ffuf/ffuf",
+      "fork": "https://github.com/TheJhyeFactor/ffuf",
+      "sourceCommit": "256c1b02499f5f8672af965d4ad7a321d606bc65",
+      "sourceRef": "v2.3.0",
+      "pinKind": "stable_release",
+      "defaultBranch": "master",
+      "licenseId": "MIT",
+      "licenseFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "27efda573d21acd87c68e008a190c7456bcd93b510b8c35a1500088249d5d930",
+          "url": "https://github.com/ffuf/ffuf/blob/256c1b02499f5f8672af965d4ad7a321d606bc65/LICENSE"
+        }
+      ],
+      "adapter": "addon_run",
+      "status": "external_provider",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false
+    },
+    {
+      "id": "nuclei",
+      "name": "nuclei",
+      "upstream": "https://github.com/projectdiscovery/nuclei",
+      "fork": "https://github.com/TheJhyeFactor/nuclei",
+      "sourceCommit": "a8c88feb4a1c8e961b7902534ce3af97e9d524a4",
+      "sourceRef": "v3.11.1",
+      "pinKind": "stable_release",
+      "defaultBranch": "dev",
+      "licenseId": "MIT",
+      "licenseFiles": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "5fa6644d2dd1987a79c06f4af210d2cf8cfc4ee799999029d0f9980c9cf95a2c",
+          "url": "https://github.com/projectdiscovery/nuclei/blob/a8c88feb4a1c8e961b7902534ce3af97e9d524a4/LICENSE.md"
+        }
+      ],
+      "adapter": "addon_run",
+      "status": "external_provider",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false
+    },
+    {
+      "id": "wireshark",
+      "name": "wireshark",
+      "upstream": "https://github.com/wireshark/wireshark",
+      "fork": "https://github.com/TheJhyeFactor/wireshark",
+      "sourceCommit": "1543d27ca60c7ac0d6ba3f62b572848b86b8f43c",
+      "sourceRef": "master",
+      "pinKind": "source_snapshot",
+      "defaultBranch": "master",
+      "licenseId": "GPL-2.0",
+      "licenseFiles": [
+        {
+          "path": "COPYING",
+          "sha256": "edaef632cbb643e4e7a221717a6c441a4c1a7c918e6e4d56debc3d8739b233f6",
+          "url": "https://github.com/wireshark/wireshark/blob/1543d27ca60c7ac0d6ba3f62b572848b86b8f43c/COPYING"
+        }
+      ],
+      "adapter": "addon_run",
+      "status": "external_provider",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false,
+      "canonicalSource": "https://gitlab.com/wireshark/wireshark",
+      "note": "Official read-only GitHub mirror; changes intended upstream go to GitLab."
+    },
+    {
+      "id": "trivy",
+      "name": "trivy",
+      "upstream": "https://github.com/aquasecurity/trivy",
+      "fork": "https://github.com/TheJhyeFactor/trivy",
+      "sourceCommit": "591e9799316a602e703f0b484f6c6d7b234ec8f3",
+      "sourceRef": "v0.75.0",
+      "pinKind": "stable_release",
+      "defaultBranch": "main",
+      "licenseId": "Apache-2.0",
+      "licenseFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "url": "https://github.com/aquasecurity/trivy/blob/591e9799316a602e703f0b484f6c6d7b234ec8f3/LICENSE"
+        },
+        {
+          "path": "NOTICE",
+          "sha256": "aed9bc6dab87c6f6567d20bf0f5c0433a8ccd3ad7873322cf79b9244eb720a1f",
+          "url": "https://github.com/aquasecurity/trivy/blob/591e9799316a602e703f0b484f6c6d7b234ec8f3/NOTICE"
+        }
+      ],
+      "adapter": "addon_run",
+      "status": "external_provider",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false
+    },
+    {
+      "id": "osv-scanner",
+      "name": "osv-scanner",
+      "upstream": "https://github.com/google/osv-scanner",
+      "fork": "https://github.com/TheJhyeFactor/osv-scanner",
+      "sourceCommit": "e840a6e8adb14b7777c78e26cfbf6e2abc1d1fc6",
+      "sourceRef": "v2.6.0",
+      "pinKind": "stable_release",
+      "defaultBranch": "main",
+      "licenseId": "Apache-2.0",
+      "licenseFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "url": "https://github.com/google/osv-scanner/blob/e840a6e8adb14b7777c78e26cfbf6e2abc1d1fc6/LICENSE"
+        }
+      ],
+      "adapter": "addon_run",
+      "status": "external_provider",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false
+    },
+    {
+      "id": "testssl",
+      "name": "testssl.sh",
+      "upstream": "https://github.com/testssl/testssl.sh",
+      "fork": "https://github.com/TheJhyeFactor/testssl.sh",
+      "sourceCommit": "97763a411c525720a5f9bd9d2cded416b10f210a",
+      "sourceRef": "v3.2.4",
+      "pinKind": "stable_release",
+      "defaultBranch": "3.3dev",
+      "licenseId": "GPL-2.0",
+      "licenseFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+          "url": "https://github.com/testssl/testssl.sh/blob/97763a411c525720a5f9bd9d2cded416b10f210a/LICENSE"
+        }
+      ],
+      "adapter": "addon_run",
+      "status": "external_provider",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false
+    },
+    {
+      "id": "mitmproxy",
+      "name": "mitmproxy",
+      "upstream": "https://github.com/mitmproxy/mitmproxy",
+      "fork": "https://github.com/TheJhyeFactor/mitmproxy",
+      "sourceCommit": "6c09d56e4c29a92f5ad01b03199977584b8ea14f",
+      "sourceRef": "v12.2.3",
+      "pinKind": "stable_release",
+      "defaultBranch": "main",
+      "licenseId": "MIT",
+      "licenseFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "cc4ab04ed7180af6c0ede7147f9ec2aa05212c088d7b3c8e38bbffe91c9c8f82",
+          "url": "https://github.com/mitmproxy/mitmproxy/blob/6c09d56e4c29a92f5ad01b03199977584b8ea14f/LICENSE"
+        }
+      ],
+      "adapter": "setup_required",
+      "status": "specialist_external",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false
+    },
+    {
+      "id": "zap",
+      "name": "zaproxy",
+      "upstream": "https://github.com/zaproxy/zaproxy",
+      "fork": "https://github.com/TheJhyeFactor/zaproxy",
+      "sourceCommit": "38ffe34a1b03fd3241e0bb233c2a083df875ee33",
+      "sourceRef": "main",
+      "pinKind": "source_snapshot",
+      "defaultBranch": "main",
+      "licenseId": "Apache-2.0",
+      "licenseFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+          "url": "https://github.com/zaproxy/zaproxy/blob/38ffe34a1b03fd3241e0bb233c2a083df875ee33/LICENSE"
+        }
+      ],
+      "adapter": "setup_required",
+      "status": "specialist_external",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false
+    },
+    {
+      "id": "metasploit",
+      "name": "metasploit-framework",
+      "upstream": "https://github.com/rapid7/metasploit-framework",
+      "fork": "https://github.com/TheJhyeFactor/metasploit-framework",
+      "sourceCommit": "2d664636002d3bfee1451c6832469f2756c54d4a",
+      "sourceRef": "master",
+      "pinKind": "source_snapshot",
+      "defaultBranch": "master",
+      "licenseId": "NOASSERTION",
+      "licenseFiles": [
+        {
+          "path": "COPYING",
+          "sha256": "38f848ebdf03a4f7ce5a703b72e8be6bd724de17d7869d71f3df78734cb4e507",
+          "url": "https://github.com/rapid7/metasploit-framework/blob/2d664636002d3bfee1451c6832469f2756c54d4a/COPYING"
+        },
+        {
+          "path": "LICENSE",
+          "sha256": "3188f34049114e64d1f9e40fc352c730507380bcbaf5b57686a8d55fb9e7b572",
+          "url": "https://github.com/rapid7/metasploit-framework/blob/2d664636002d3bfee1451c6832469f2756c54d4a/LICENSE"
+        },
+        {
+          "path": "LICENSE_GEMS",
+          "sha256": "343d9264d398e0178a2795858ee43fd4c190db02fb6bba1a47a557243aec164d",
+          "url": "https://github.com/rapid7/metasploit-framework/blob/2d664636002d3bfee1451c6832469f2756c54d4a/LICENSE_GEMS"
+        }
+      ],
+      "adapter": "setup_required",
+      "status": "specialist_external",
+      "managedRelease": "not_qualified",
+      "modelQualification": "unevaluated",
+      "forkActionsEnabled": false,
+      "note": "Inspect the pinned upstream license and third-party components; GitHub SPDX detection reports NOASSERTION."
+    }
+  ]
+}
