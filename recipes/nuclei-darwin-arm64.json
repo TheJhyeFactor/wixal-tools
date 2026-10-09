@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "tool": "nuclei",
+  "sourceCommit": "a8c88feb4a1c8e961b7902534ce3af97e9d524a4",
+  "sourceRepository": "https://github.com/TheJhyeFactor/nuclei",
+  "profile": "go-single-binary-v1",
+  "goToolchain": "1.27.2",
+  "moduleDigests": {
+    "go.mod": "57e1f9230ef1da13280cc702c01b6135241128fbc710adea399eaa6d142b849c",
+    "go.sum": "c9be45a7baa2b3fda7d9ecdea91865b9caf78a733c70d1133d346bcc7dba501b"
+  },
+  "buildPackage": "./cmd/nuclei",
+  "distribution": "candidate_only",
+  "signing": "none",
+  "managedQualification": "not_qualified"
+}

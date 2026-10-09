@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "tool": "trivy",
+  "sourceCommit": "591e9799316a602e703f0b484f6c6d7b234ec8f3",
+  "sourceRepository": "https://github.com/TheJhyeFactor/trivy",
+  "profile": "go-single-binary-v1",
+  "goToolchain": "1.27.2",
+  "moduleDigests": {
+    "go.mod": "f15ca60ee515b9139c61617560fd90a09df60aaeae23961b086d9c4eccdc4aee",
+    "go.sum": "a5bab0c8c4dee3365bb874f845112df45e5114639d62f7d35ecf57eff1fbe251"
+  },
+  "buildPackage": "./cmd/trivy",
+  "distribution": "candidate_only",
+  "signing": "none",
+  "managedQualification": "not_qualified",
+  "ldflags": "-X github.com/aquasecurity/trivy/pkg/version/app.ver=0.75.0"
+}

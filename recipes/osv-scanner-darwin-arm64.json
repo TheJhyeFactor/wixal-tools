@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "tool": "osv-scanner",
+  "sourceCommit": "e840a6e8adb14b7777c78e26cfbf6e2abc1d1fc6",
+  "sourceRepository": "https://github.com/TheJhyeFactor/osv-scanner",
+  "profile": "go-single-binary-v1",
+  "goToolchain": "1.27.2",
+  "moduleDigests": {
+    "go.mod": "47db8d4f9e4b49922097899d76692a37a84e29143f439cc47fdf925b4feab615",
+    "go.sum": "d8310b422c284f42751042d5d66ca661981f5c855dd2e19e1173090f7fcc2989"
+  },
+  "buildPackage": "./cmd/osv-scanner",
+  "distribution": "candidate_only",
+  "signing": "none",
+  "managedQualification": "not_qualified"
+}

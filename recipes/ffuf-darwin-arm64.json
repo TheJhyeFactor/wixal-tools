@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "tool": "ffuf",
+  "sourceCommit": "256c1b02499f5f8672af965d4ad7a321d606bc65",
+  "sourceRepository": "https://github.com/TheJhyeFactor/ffuf",
+  "profile": "go-single-binary-v1",
+  "goToolchain": "1.27.2",
+  "moduleDigests": {
+    "go.mod": "ba8ee5f90c7c4a71662204861234e3a361e69300da6efd68be14146091a08122",
+    "go.sum": "6c30b709f28e239414cf6babf9f2b97a0a4829cb436ccf0209028a3a558483fb"
+  },
+  "buildPackage": ".",
+  "distribution": "candidate_only",
+  "signing": "none",
+  "managedQualification": "not_qualified"
+}

@@ -39,7 +39,9 @@ def validate(root=ROOT):
                 raise ValueError('Recipe must match source lock')
             if recipe['distribution'] != 'candidate_only' or recipe['signing'] != 'none':
                 raise ValueError('Candidate build must not claim release signing')
-            if not re.fullmatch(r'[0-9a-f]{64}', recipe['cargoLockSha256']):
+            if recipe.get('profile')=='go-single-binary-v1':
+                if set(recipe['moduleDigests'])!={'go.mod','go.sum'} or any(not re.fullmatch(r'[0-9a-f]{64}',v) for v in recipe['moduleDigests'].values()):raise ValueError('Go module and dependency checksums must be pinned')
+            elif not re.fullmatch(r'[0-9a-f]{64}', recipe['cargoLockSha256']):
                 raise ValueError('Cargo.lock must be pinned')
     suite = json.loads((root / 'contracts/acceptance-suite.json').read_text())
     # Use the application-owned acceptance contract verbatim, including its gates.

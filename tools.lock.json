@@ -79,7 +79,8 @@
       "status": "external_provider",
       "managedRelease": "not_qualified",
       "modelQualification": "unevaluated",
-      "forkActionsEnabled": false
+      "forkActionsEnabled": false,
+      "recipe": "recipes/ffuf-darwin-arm64.json"
     },
     {
       "id": "nuclei",
@@ -102,7 +103,8 @@
       "status": "external_provider",
       "managedRelease": "not_qualified",
       "modelQualification": "unevaluated",
-      "forkActionsEnabled": false
+      "forkActionsEnabled": false,
+      "recipe": "recipes/nuclei-darwin-arm64.json"
     },
     {
       "id": "wireshark",
@@ -155,7 +157,8 @@
       "status": "external_provider",
       "managedRelease": "not_qualified",
       "modelQualification": "unevaluated",
-      "forkActionsEnabled": false
+      "forkActionsEnabled": false,
+      "recipe": "recipes/trivy-darwin-arm64.json"
     },
     {
       "id": "osv-scanner",
@@ -178,7 +181,8 @@
       "status": "external_provider",
       "managedRelease": "not_qualified",
       "modelQualification": "unevaluated",
-      "forkActionsEnabled": false
+      "forkActionsEnabled": false,
+      "recipe": "recipes/osv-scanner-darwin-arm64.json"
     },
     {
       "id": "testssl",

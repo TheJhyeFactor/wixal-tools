@@ -35,6 +35,10 @@ The Source contracts workflow runs the local checks for pushes and pull requests
 
 The manually dispatched **RustScan arm64 build candidate** workflow builds the pinned source with Rust 1.90.0 and a hash-pinned Cargo.lock on arm64 macOS. Dependencies are vendored before an offline locked build. The output retains the upstream and vendored source, licenses, executable digest, recipe/compiler/platform identity, system-library inspection, inventory and a real loopback listener smoke check. A tar archive preserves executable permissions through GitHub's artifact ZIP transport. The artifact is unsigned and retained for 14 days. One build is not proof of reproducibility or complete compatibility. No workflow holds production signing keys or publishes a release.
 
+The **Go tool arm64 build candidates** workflow builds ffuf, Nuclei, Trivy and OSV-Scanner from their locked fork commits with Go 1.27.2. Recipes pin both go.mod and go.sum. The builder vendors dependencies, disables compiler auto-download, builds without cgo, retains corresponding source and third-party notices, and audits executable architecture and system libraries. A successful build is a candidate; actual package and capability acceptance remain separate requirements.
+
+Catalogue tooling requires `python -m pip install -r requirements-catalogue.txt` before running the complete test suite.
+
 To run it from the CLI:
 
 ```sh
@@ -46,7 +50,11 @@ gh run list --repo TheJhyeFactor/wixal-tools --workflow rustscan-candidate.yml
 
 The repository has immutable releases enabled for future reviewed releases. [`contracts/promotion.json`](contracts/promotion.json) records the remaining signing, custody, licensing and acceptance gates. [`contracts/acceptance-suite.json`](contracts/acceptance-suite.json) retains the application's 104 mandatory scenario families. Candidate artifacts never become approved catalogue entries automatically.
 
-The app still needs a separately approved public TUF catalogue, trusted root embedded in the matching app, exact artifact identities and allowed download hosts. Ordinary app builds remain on external providers until that configuration exists. GitHub release assets redirect to download hosts; the current application fetcher rejects redirects, so simply pasting a release URL cannot configure a working repository.
+The app still needs a separately approved public TUF catalogue, trusted root embedded in the matching app, exact artifact identities and allowed download hosts. Ordinary app builds remain on external providers until that configuration exists. The application supports bounded redirects to explicitly approved hosts; short-lived GitHub asset query parameters are accepted only on its named HTTPS asset hosts after a trusted redirect.
+
+`scripts/catalogue.py` assembles authenticated repository metadata from reviewed payload identities and externally supplied signing keys. Root bootstrap requires three distinct assigned public keys and a two-signature quorum. Root rotation verifies both old and new thresholds. Private keys must remain outside this checkout and served output, with owner-only file permissions. This checks cryptographic policy; named custodian independence still requires human operational setup.
+
+The **Verify catalogue promotion** workflow validates a signed candidate from an exact Actions run and artifact. It holds no signing keys, has read-only repository permissions and does not publish. The production contract remains gated until public trust, independent custody and mandatory acceptance evidence exist. The user has deferred release signing/notarization and wider hardware qualification; these are not silently marked passed.
 
 Nmap requires review against the [Nmap Public Source License](https://nmap.org/npsl/) and any relevant [OEM redistribution terms](https://nmap.org/oem/) before managed binary packaging. A fork does not settle redistribution rights. Each tool and its dependencies retain their upstream licenses; GitHub's SPDX detection is recorded as evidence, not a legal determination. This repository does not relicense upstream software.
 
