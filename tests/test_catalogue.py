@@ -49,7 +49,25 @@ class CatalogueTests(unittest.TestCase):
         output=self.directory/'published';catalogue.assemble(self.root,path,payloads,signers,output)
         root=Metadata.from_file(str(self.root))
         for role in ['targets','snapshot','timestamp']:root.verify_delegate(role,Metadata.from_file(str(output/'metadata'/f'{role}.json')))
+        updated=self.directory/'updated';catalogue.assemble(self.root,path,payloads,signers,updated,previous=output)
+        _,roles,_=catalogue.verify_repository(updated)
+        self.assertEqual({r:d.signed.version for r,d in roles.items()},{'targets':2,'snapshot':2,'timestamp':2})
+        (updated/'targets/tool.tar.gz').write_bytes(b'changed after signing')
+        with self.assertRaises(Exception):catalogue.verify_repository(updated)
         (payloads/'tool.tar.gz').write_bytes(b'tampered')
         with self.assertRaisesRegex(ValueError,'identity'):catalogue.assemble(self.root,path,payloads,signers,self.directory/'bad-published')
     def test_production_gate_cannot_be_bypassed_by_candidate(self):
         with self.assertRaisesRegex(ValueError,'gated'):catalogue.promotion(self.directory,self.directory/'evidence.json')
+    def test_promotion_requires_exact_tuple_and_hashed_independent_evidence(self):
+        evidence=self.directory/'trace.json';evidence.write_text('{"actualEffect":"none"}')
+        identity=dict(packageSha256='package',executableSha256='executable',adapter='adapter',helperSha256='helper',architecture='arm64',macOS='27')
+        packages=[dict(sha256='package',adapter='adapter',entrypoint=dict(sha256='executable'))]
+        families=[dict(id='CASE',mandatory=True,evidenceClasses=['L'])]
+        report=dict(status='passed',identity=identity,cases=[dict(id='CASE',status='passed',identity=identity,evidenceClasses=['L'],evidence=[dict(path='trace.json',sha256=catalogue.digest(evidence))])])
+        catalogue.verify_evidence(report,self.directory,families,packages)
+        evidence.write_text('altered')
+        with self.assertRaisesRegex(ValueError,'hash'):catalogue.verify_evidence(report,self.directory,families,packages)
+        report['cases'][0]['evidence']=[]
+        with self.assertRaisesRegex(ValueError,'independent'):catalogue.verify_evidence(report,self.directory,families,packages)
+        report['identity']=dict(identity,helperSha256='different')
+        with self.assertRaisesRegex(ValueError,'tuple'):catalogue.verify_evidence(report,self.directory,families,packages)
